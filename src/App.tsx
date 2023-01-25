@@ -38,9 +38,6 @@ const App = () => {
                 Color
               </th>
               <th scope="col" className="text-white">
-                Power
-              </th>
-              <th scope="col" className="text-white">
                 Image
               </th>
               <th scope="col" className="text-white">

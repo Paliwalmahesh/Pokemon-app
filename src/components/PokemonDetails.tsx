@@ -14,9 +14,6 @@ const PokemonDetails = (props: pokemonprop) => {
       <td>{pokemon.name}</td>
       <td>{pokemon.color}</td>
       <td>
-        {(pokemon.power && <p>{pokemon.power}</p>) || "Power Not Available"}
-      </td>
-      <td>
         <img
           src={
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" +
