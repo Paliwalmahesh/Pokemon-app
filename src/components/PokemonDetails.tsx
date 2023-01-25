@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { Pokemon } from "../Pokemon";
 
@@ -25,7 +24,7 @@ const PokemonDetails = (props: pokemonprop) => {
         />
       </td>
       <td>
-        <Link to={`/details/${pokemon.id - 1}`} className="btn btn-primary">
+        <Link to={`/details/${pokemon.id}`} className="btn btn-primary">
           Show Details
         </Link>
       </td>

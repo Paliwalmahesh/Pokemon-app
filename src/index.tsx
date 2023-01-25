@@ -6,17 +6,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PokemonCard } from "./components/PokemonCard";
 import { PokemonForm } from "./components/PokemonForm";
+import { NavBar } from "./components/NavBar";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <NavBar />,
     children: [
       {
         path: "",
         element: <App key={1} />,
       },
       {
-        path: "details/:id",
+        path: "details/:idOrName",
         element: <PokemonCard />,
       },
       {

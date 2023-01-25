@@ -4,6 +4,7 @@ import { fetchPokemon } from "../Http";
 import { Pokemon } from "../Pokemon";
 
 export const PokemonCard = () => {
+  const [errormsg, seterrormsg] = useState<String>("");
   const [pokemon, setPokemon] = useState<Pokemon>({
     id: 1,
     name: "",
@@ -13,21 +14,30 @@ export const PokemonCard = () => {
     types: [],
   });
 
+  const params = useParams();
+  const idOrName = params.idOrName ?? "0";
+
   const fetchPokemonHere = async () => {
-    const pokemon = await fetchPokemon(`${id + 1}`);
-    console.log(pokemon);
-    setPokemon(pokemon);
+    try {
+      seterrormsg("");
+      const pokemon = await fetchPokemon(`${idOrName}`);
+
+      console.log(idOrName);
+      setPokemon(pokemon);
+    } catch (error: any) {
+      // console.log("erroris:" + error.message);
+      seterrormsg(error.message as string);
+      //   console.log("error");
+      // console.log(errormsg);
+    }
   };
 
   useEffect(() => {
     fetchPokemonHere();
-  }, []);
-
-  const params = useParams();
-  const id = parseInt(params.id ?? "0");
+  }, [idOrName]);
   return (
     <>
-      {(pokemon && (
+      {(errormsg == "" && (
         <div className="details-pokemon container my-4">
           <div className="card" style={{ width: "18rem" }}>
             <img
@@ -55,7 +65,6 @@ export const PokemonCard = () => {
               <div className="types">
                 {pokemon.types &&
                   pokemon.types.map((type: any) => {
-                    console.log(type);
                     return (
                       <button className="btn btn-primary mx-1">{type}</button>
                     );
@@ -64,7 +73,12 @@ export const PokemonCard = () => {
             </div>
           </div>
         </div>
-      )) || <div> "enter Valid id wchich id less then </div>}
+      )) || (
+        <div className="alert alert-warning" role="alert">
+          {" "}
+          {errormsg}
+        </div>
+      )}
     </>
   );
 };

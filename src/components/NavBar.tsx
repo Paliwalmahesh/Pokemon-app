@@ -1,6 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { FormEventHandler } from "react";
 
 export const NavBar = () => {
+  const navigate = useNavigate();
+  const navigateToDetail: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    const namesearch = document.getElementById(
+      "searchName"
+    ) as HTMLInputElement;
+    const value = namesearch.value;
+    navigate(`details/${value}`);
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -37,8 +48,27 @@ export const NavBar = () => {
               </a>
             </li>
           </ul>
+          <form
+            className="form-inline my-2 my-lg-0 d-flex justify-content-end"
+            onSubmit={navigateToDetail}
+          >
+            <input
+              className="form-control mr-sm-2"
+              type="search"
+              id="searchName"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button
+              className="btn btn-outline-success my-2 my-sm-0"
+              type="submit"
+            >
+              Search
+            </button>
+          </form>
         </div>
       </nav>
+      <Outlet></Outlet>
     </>
   );
 };

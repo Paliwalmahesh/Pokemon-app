@@ -4,7 +4,6 @@ import PokemonDetails from "./components/PokemonDetails";
 import { fetchPokemons } from "./Http";
 import { Pokemon } from "./Pokemon";
 import "./index.css";
-import { NavBar } from "./components/NavBar";
 
 const App = () => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
@@ -23,7 +22,6 @@ const App = () => {
 
   return (
     <>
-      <NavBar />
       <div className="container mx-auto my-5">
         <table className="table border border-success">
           <thead>
