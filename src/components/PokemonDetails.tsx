@@ -4,11 +4,10 @@ import { Pokemon } from "../Pokemon";
 
 interface pokemonprop {
   pokemon: Pokemon;
-  handleEvent: Function;
   index: number;
 }
 const PokemonDetails = (props: pokemonprop) => {
-  const { pokemon, index, handleEvent } = props;
+  const { pokemon } = props;
   return (
     <tr className="bg-light">
       <th scope="row">{pokemon.id}</th>
@@ -29,11 +28,7 @@ const PokemonDetails = (props: pokemonprop) => {
         />
       </td>
       <td>
-        <Link
-          to={`/details/${pokemon.id - 1}`}
-          className="btn btn-primary"
-          onClick={() => handleEvent(index)}
-        >
+        <Link to={`/details/${pokemon.id - 1}`} className="btn btn-primary">
           Show Details
         </Link>
       </td>

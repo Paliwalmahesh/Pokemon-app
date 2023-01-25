@@ -1,21 +1,17 @@
 import { useState, useEffect } from "react";
-import { PokemonCard } from "./components/PokemonCard";
 // import { pokemon } from "./Pokemon";
 import PokemonDetails from "./components/PokemonDetails";
 import { fetchPokemons } from "./Http";
 import { Pokemon } from "./Pokemon";
 import "./index.css";
+import { NavBar } from "./components/NavBar";
 
 const App = () => {
-  const [cpokemon, setcpokemon] = useState(0);
-  // const handleEvent = () => {
-  //   setcpokemon(cpokemon + 1)
-  // }
-  const [pokemons, setpokemons] = useState<Pokemon[]>([]);
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const fetchPokemonAsync = async () => {
     try {
       const res = await fetchPokemons();
-      setpokemons(res);
+      setPokemons(res);
     } catch (errormsg) {
       console.error(errormsg);
     }
@@ -27,6 +23,7 @@ const App = () => {
 
   return (
     <>
+      <NavBar />
       <div className="container mx-auto my-5">
         <table className="table border border-success">
           <thead>
@@ -54,13 +51,7 @@ const App = () => {
           <tbody>
             {pokemons.length > 0 ? (
               pokemons.map((pok, index) => {
-                return (
-                  <PokemonDetails
-                    pokemon={pok}
-                    index={index}
-                    handleEvent={setcpokemon}
-                  />
-                );
+                return <PokemonDetails pokemon={pok} index={index} />;
               })
             ) : (
               <tr>

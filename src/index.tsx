@@ -5,17 +5,25 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PokemonCard } from "./components/PokemonCard";
+import { PokemonForm } from "./components/PokemonForm";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App key={1} />,
-    id: "1",
-  },
-  {
-    path: "/details/:id",
-    element: <PokemonCard />,
-    id: "2",
+    children: [
+      {
+        path: "",
+        element: <App key={1} />,
+      },
+      {
+        path: "details/:id",
+        element: <PokemonCard />,
+      },
+      {
+        path: "add-pokemon/",
+        element: <PokemonForm />,
+      },
+    ],
   },
 ]);
 

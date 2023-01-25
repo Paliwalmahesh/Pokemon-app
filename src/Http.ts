@@ -1,30 +1,19 @@
-
+import axios from "axios"
 import { Pokemon } from "./Pokemon"
 
-export const pokemons : Pokemon[] = [{
-    id : 1,
-    name : 'pikachu',
-    color : 'yellow',
-    power: 20,
-},
-{
-    id : 2,
-    name : 'pikachu2',
-    color : 'red',  
-},
-{
-    id : 3,
-    name : 'pikachu3',
-    color : 'lightblue',
-    power : 30,
-}]
 
-export const fetchPokemons = () : Promise<Pokemon[]> => {
-    return new Promise(function(resolve, reject){
-        setTimeout(() => {
-            resolve(pokemons)
-        }, 2000)
-
-        // reject("Error") 
-    })
+export const fetchPokemons =  async () : Promise<Pokemon[]> => {
+    // console.log("fetch/ pokemons");
+ const{ data } = await axios.get("https://pokeapi.co/api/v2/pokemon/?limit=20");
+//  console.log(data);
+ const pokemons:Pokemon[] = data.results.map((pokemon: any, index: number) => {
+    return {
+        id:index+1,
+        name : pokemon.name,
+        color : "red",
+        power: 0,
+    }
+ }
+ );
+ return pokemons;
 }
