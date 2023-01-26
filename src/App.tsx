@@ -4,21 +4,10 @@ import PokemonDetails from "./components/PokemonDetails";
 import { fetchPokemons } from "./Http";
 import { Pokemon } from "./Pokemon";
 import "./index.css";
+import { usePokemons } from "./UsePokemons";
 
 const App = () => {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const fetchPokemonAsync = async () => {
-    try {
-      const res = await fetchPokemons();
-      setPokemons(res);
-    } catch (errormsg) {
-      console.error(errormsg);
-    }
-  };
-
-  useEffect(() => {
-    fetchPokemonAsync();
-  }, []);
+  const { pokemonsList, isLoading, error } = usePokemons();
 
   return (
     <>
@@ -44,13 +33,13 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            {pokemons.length > 0 ? (
-              pokemons.map((pok, index) => {
+            {pokemonsList && pokemonsList.length > 0 ? (
+              pokemonsList.map((pok, index) => {
                 return <PokemonDetails pokemon={pok} index={index} />;
               })
             ) : (
               <tr>
-                <td>error</td>
+                <td>{error}</td>
               </tr>
             )}
           </tbody>

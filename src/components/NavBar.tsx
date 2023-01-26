@@ -5,6 +5,7 @@ import { FormEventHandler } from "react";
 export const NavBar = () => {
   const navigate = useNavigate();
   const navigateToDetail: FormEventHandler<HTMLFormElement> = (event) => {
+    console.log(event);
     event.preventDefault();
     const namesearch = document.getElementById(
       "searchName"

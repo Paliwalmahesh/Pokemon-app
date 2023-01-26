@@ -2,42 +2,17 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchPokemon } from "../Http";
 import { Pokemon } from "../Pokemon";
+import { usePokemon } from "../UsePokemon";
 
 export const PokemonCard = () => {
-  const [errormsg, seterrormsg] = useState<String>("");
-  const [pokemon, setPokemon] = useState<Pokemon>({
-    id: 1,
-    name: "",
-    color: "",
-    height: 0,
-    weight: 0,
-    types: [],
-  });
-
   const params = useParams();
   const idOrName = params.idOrName ?? "0";
+  const { pokemon, isLoading, error } = usePokemon(idOrName);
+  console.log(error);
 
-  const fetchPokemonHere = async () => {
-    try {
-      seterrormsg("");
-      const pokemon = await fetchPokemon(`${idOrName}`);
-
-      console.log(idOrName);
-      setPokemon(pokemon);
-    } catch (error: any) {
-      // console.log("erroris:" + error.message);
-      seterrormsg(error.message as string);
-      //   console.log("error");
-      // console.log(errormsg);
-    }
-  };
-
-  useEffect(() => {
-    fetchPokemonHere();
-  }, [idOrName]);
   return (
     <>
-      {(errormsg == "" && (
+      {(pokemon && (
         <div className="details-pokemon container my-4">
           <div className="card" style={{ width: "18rem" }}>
             <img
@@ -75,8 +50,7 @@ export const PokemonCard = () => {
         </div>
       )) || (
         <div className="alert alert-warning" role="alert">
-          {" "}
-          {errormsg}
+          {error}
         </div>
       )}
     </>
