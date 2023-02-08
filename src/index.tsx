@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/3.4.1/js/bootstrap.min.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PokemonCard } from "./components/PokemonCard";
 import { PokemonForm } from "./components/PokemonForm";

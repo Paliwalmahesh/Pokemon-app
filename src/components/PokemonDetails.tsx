@@ -3,7 +3,6 @@ import { Pokemon } from "../Pokemon";
 
 interface pokemonprop {
   pokemon: Pokemon;
-  index: number;
 }
 const PokemonDetails = (props: pokemonprop) => {
   const { pokemon } = props;
