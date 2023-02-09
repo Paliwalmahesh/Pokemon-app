@@ -39,7 +39,7 @@ export const NavBar = () => {
               </a>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to={`/add-pokemon/`}>
+              <Link className="nav-link" to={"/add-pokemon/"}>
                 Add POkemon
               </Link>
             </li>

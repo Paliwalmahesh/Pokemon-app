@@ -39,9 +39,11 @@ export const PokemonCard = () => {
               <strong>height : {pokemon.height}</strong>
               <div className="types">
                 {pokemon.types &&
-                  pokemon.types.map((type: any) => {
+                  pokemon.types.map((type: any, index: number) => {
                     return (
-                      <button className="btn btn-primary mx-1">{type}</button>
+                      <button key={index} className="btn btn-primary mx-1">
+                        {type}
+                      </button>
                     );
                   })}
               </div>
